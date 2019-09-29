@@ -1,6 +1,7 @@
 import {
   SET_USER,
-  SHOW_ERR_MSG
+  SHOW_ERR_MSG,
+  SET_TITLE
 } from './actionTypes.js'
 import { reqLogin } from '../api/index'
 import storageUtils from '../utils/storageUtils'
@@ -29,3 +30,9 @@ export const login = (username, password) => {
     }
   }
 }
+
+// 设置标题
+export const setTitle = (title) => ({
+  type: SET_TITLE,
+  title
+})

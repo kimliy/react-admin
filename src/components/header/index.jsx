@@ -16,7 +16,7 @@ class Header extends Component {
     }
   }
   render() {
-    const { user } = this.props;
+    const { user, title } = this.props;
     const { time, dayPictureUrl, weather } = this.state;
     return (
       <div className="header">
@@ -25,7 +25,7 @@ class Header extends Component {
           <LinkButton name="退出登录" onClick={this.logout}></LinkButton>
         </div>
         <div className="header-bottom">
-          <div className="header-bottom-left">啦啦啦</div>
+          <div className="header-bottom-left">{title}</div>
           <div className="header-bottom-right">
             <span>{time}</span>
             <img src={dayPictureUrl} alt="weather"  />
@@ -72,6 +72,6 @@ class Header extends Component {
 }
 
 export default connect(
-  state => ({user: state.user}),
+  state => ({user: state.user, title: state.title}),
   null
 )(Header);

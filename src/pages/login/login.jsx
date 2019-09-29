@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
 import logo from './images/logo.svg';
 import './login.less';
-import { connect } from 'react-redux';
 import { login } from '../../store/actionCreators';
-import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   render() {
