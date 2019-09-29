@@ -15,10 +15,24 @@ class Category extends Component {
     };
   }
   render() {
+    const { parentId, loading, categorys, subCategorys } = this.state;
+    const extra = (
+      <Button type="primary">
+        <Icon type="plus" />
+        添加
+      </Button>
+    )
     return (
-      <div>
-        Category
-      </div>
+      <Card title="我是标题" extra={extra}>
+        <Table
+          bordered
+          rowKey="_id"
+          columns={this.columns}
+          loading={loading}
+          dataSource={parentId==='0' ? categorys : subCategorys}
+          pagination={{defaultPageSize: 5, showQuickJumper: true}}
+        />
+      </Card>
     )
   }
   getCategorys = async(parentId) => {
@@ -43,6 +57,28 @@ class Category extends Component {
     } else {
       message.error('获取分类数据失败');
     }
+  }
+  initColumns = () => {
+    this.columns = [
+      {
+        title: '分类名称',
+        dataIndex: 'name'
+      },
+      {
+        title: '操作',
+        width: 300,
+        align: 'center',
+        render: (text, record, index) => (
+          <span>
+            <LinkButton name="修改分类"></LinkButton>
+            {this.state.parentId === '0' ? <LinkButton name="查看子分类" /> : null}
+          </span>
+        )
+      }
+    ]
+  }
+  componentWillMount() {
+    this.initColumns();
   }
   componentDidMount() {
     this.getCategorys();
