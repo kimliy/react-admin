@@ -1,10 +1,29 @@
 import ajax from './ajax';
 import { message } from 'antd';
+import jsonp from 'jsonp';
 
-const baseUrl = '/api'
+const baseUrl = '/api';
 
 const reqLogin = (username, password) => ajax(baseUrl + '/login', {username, password}, 'POST');
 
+//百度天气
+const reqWeather = (city) => {
+  const url = `http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`;
+  return new Promise((resolve, reject) => {
+    jsonp(url, {
+      params: 'callback'
+    }, (error, data) => {
+      if (!error && data.status === 'success') {
+        const {dayPictureUrl, weather} = data.results[0].weather_data[0];
+        resolve({dayPictureUrl, weather});
+      } else {
+        message.error('获取天气失败');
+      }
+    })
+  })
+}
+
 export {
-  reqLogin
+  reqLogin,
+  reqWeather
 }

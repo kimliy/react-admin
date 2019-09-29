@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { message } from 'antd';
+import {
+  message
+} from 'antd';
 
 const ajax = (url, data = {}, method = 'GET') => {
   return new Promise((resolve, reject) => {

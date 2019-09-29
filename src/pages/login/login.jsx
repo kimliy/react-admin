@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
-import logo from './images/logo.svg'
-import './login.less'
-import { reqLogin } from '../../api/index'
-import { connect } from 'react-redux'
-import { login } from '../../store/actionCreators'
-import { Redirect } from 'react-router-dom'
+import logo from './images/logo.svg';
+import './login.less';
+import { connect } from 'react-redux';
+import { login } from '../../store/actionCreators';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   render() {
@@ -34,7 +33,7 @@ class Login extends Component {
                   { min: 4, message: '用户名至少4位' },
                   { max: 12, message: '用户名最多12位' },
                   { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文、数字或下划线组成' }
-                  ]
+                ]
               })(
                 <Input
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -45,9 +44,8 @@ class Login extends Component {
             <Form.Item>
               {getFieldDecorator('password', {
                 rules: [
-                  
                   { validator: this.validatePwd }
-                  ],
+                ],
               })(
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -70,20 +68,20 @@ class Login extends Component {
     const pwdLen = value && value.length
     const pwdReg = /^[a-zA-Z0-9_]+$/
     if (!value) {
-        callback('请输入密码！')
+      callback('请输入密码！')
     } else if (pwdLen < 4) {
-        callback('密码必须大于4位')
+      callback('密码必须大于4位')
     } else if (pwdLen > 12) {
-        callback('密码必须小于 12 位')
+      callback('密码必须小于 12 位')
     } else if (!pwdReg.test(value)) {
-        callback('密码必须是英文、 数组或下划线组成')
+      callback('密码必须是英文、 数组或下划线组成')
     } else {
-        callback()
+      callback()
     }
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields(async(err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         const { username, password } = values;
         this.props.login(username, password);
