@@ -23,7 +23,11 @@ const reqWeather = (city) => {
   })
 }
 
+// 获取分类列表
+const reqCategorys = (parentId = '0') => ajax(baseUrl + '/manage/category/list', {parentId});
+
 export {
   reqLogin,
-  reqWeather
+  reqWeather,
+  reqCategorys
 }

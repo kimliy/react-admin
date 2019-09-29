@@ -1,11 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class Home extends Component {
+import './home.less';
+
+class Home extends Component {
   render() {
     return (
-      <div>
-        Home
+      <div className="home">
+        欢迎使用后台管理系统，{this.props.user.username}
       </div>
     )
   }
 }
+
+export default connect(
+  state => ({user: state.user}),
+  null
+)(Home);
