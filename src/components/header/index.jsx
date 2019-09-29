@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './index.less';
+import { Modal } from 'antd';
 import { connect } from 'react-redux';
 import { formateDate } from '../../utils/dateUtils.js';
 import { reqWeather } from '../../api/index';
 import LinkButton from '../../components/linkButton';
-import { Modal } from 'antd';
+import { logout } from '../../store/actionCreators';
+import './index.less';
 
 class Header extends Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class Header extends Component {
       content: (
         <h3>确认退出吗?</h3>
       ),
-      onOk() {
-        console.log('logout')
+      onOk: () => {
+        this.props.logout()
       },
       onCancel() {
         console.log('cancel')
@@ -73,5 +74,5 @@ class Header extends Component {
 
 export default connect(
   state => ({user: state.user, title: state.title}),
-  null
+  {logout}
 )(Header);

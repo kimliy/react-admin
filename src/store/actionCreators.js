@@ -1,7 +1,8 @@
 import {
   SET_USER,
   SHOW_ERR_MSG,
-  SET_TITLE
+  SET_TITLE,
+  RESET_USER
 } from './actionTypes.js'
 import { reqLogin } from '../api/index'
 import storageUtils from '../utils/storageUtils'
@@ -36,3 +37,11 @@ export const setTitle = (title) => ({
   type: SET_TITLE,
   title
 })
+
+// 退出登录
+export const logout = () => {
+  storageUtils.removeUser();
+  return {
+    type: RESET_USER
+  }
+}

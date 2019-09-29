@@ -2,7 +2,8 @@ import { combineReducers } from 'redux';
 import {
   SET_USER,
   SHOW_ERR_MSG,
-  SET_TITLE
+  SET_TITLE,
+  RESET_USER
 } from './actionTypes';
 import storageUtils from '../utils/storageUtils';
 
@@ -16,6 +17,8 @@ const user = (state = defaultUser, action) => {
     case SHOW_ERR_MSG:
       const msg = action.msg
       return {...state, msg}
+    case RESET_USER:
+      return {}
     default: 
       return state
   }
